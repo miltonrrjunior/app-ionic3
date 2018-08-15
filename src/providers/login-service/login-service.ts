@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { URL_ARI } from '../../app/utils/Utils';
 import { RequestOptions, Headers, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
