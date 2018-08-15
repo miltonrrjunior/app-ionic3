@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 import { Usuario } from '../../app/entity/Usuario';
+
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the LoginPage page.
@@ -16,37 +18,51 @@ import { Usuario } from '../../app/entity/Usuario';
   templateUrl: 'login.html',
   providers: [LoginServiceProvider]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
   public usuario = new Usuario();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginService: LoginServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loginService: LoginServiceProvider, private toastCtrl: ToastController) {
+  }
+
+  ngOnInit() {
+    this.usuario = new Usuario();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(): void {
-    if (this.loginIsValid) {
+  login() {
+
+    if (this.loginIsValid()) {
       this.loginService.login(this.usuario.email, this.usuario.senha).subscribe(
         response => console.log(response)
       );
-    } else {
-      alert('E-mail ou senha incorreto!')
     }
   }
 
   loginIsValid(): boolean {
-    if (this.usuario.email == undefined || this.usuario.email.trim.length <= 0) {
-      alert('Preencha o E-mail')
+    if (this.usuario.email == undefined) {
+      this.showMessage('Preencha o campo e-mail!', 'warning')
       return false;
     }
-    if (this.usuario.senha == undefined || this.usuario.senha.trim.length <= 0) {
-      alert('Preencha a Senha')
+    if (this.usuario.senha == undefined) {
+      this.showMessage('Preencha o campo senha!', 'warning')
       return false;
     }
     return true;
+  }
+
+  showMessage(message: string, type: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      cssClass: 'toast-' + type
+    });
+
+    toast.present();
   }
 
 }
