@@ -1,0 +1,1 @@
+export const URL_ARI = "localhost:8080/";
