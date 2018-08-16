@@ -1,1 +1,1 @@
-export const URL_ARI = "localhost:8080/";
+export const URL_API: string = 'http://localhost:8080'

@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginPage } from '../pages/login/login';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { HttpModule } from '@angular/http';
     HttpModule,
     FormsModule,
     HttpClientModule,
+    CookieModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

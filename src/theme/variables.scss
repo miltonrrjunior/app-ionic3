@@ -91,3 +91,23 @@ $toast-ios-title-color: white;
 
 @import "roboto";
 @import "noto-sans";
+
+
+
+.toast-success {
+  > div{
+      background-color:#81c5da!important;
+ }
+}
+
+.toast-warning {
+  > div{
+      background-color:#ecd904!important;
+ }
+}
+
+.toast-danger {
+  > div{
+      background-color:rgb(192, 51, 63)!important;
+ }
+}

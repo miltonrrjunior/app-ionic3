@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,16 +16,25 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  constructor(public platform: Platform,
+     public statusBar: StatusBar, 
+     public splashScreen: SplashScreen, 
+     private cookieService: CookieService) {
+     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage }
     ];
+
+    if (this.cookieService.getObject("usuarioAtual")) {
+      this.rootPage = HomePage;
+    } else {
+      this.rootPage = LoginPage;
+    }
 
   }
 
